@@ -7,12 +7,11 @@ const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("../swagger.json");
 
 // Middleware to set CORS headers
-app.use((req: expressModule.Request, res: expressModule.Response, next: expressModule.NextFunction) => {
-    res.setHeader("Access-Control-Allow-Origin", "*"); // Allow requests from any origin
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // Allow specified HTTP methods
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Allow specified headers
-    next();
-});
+app.use(cors({
+    origin: "https://node-deploy-test-six.vercel.app",  // Specify allowed origins
+    methods: ["GET", "POST", "PUT", "DELETE"],  // Allow specific methods
+    headers: ["Content-Type", "Authorization"]  // Allow specific headers
+}));
 
 app.get("/", (req: expressModule.Request, res: expressModule.Response) => res.send("Express on Vercel"));
 
