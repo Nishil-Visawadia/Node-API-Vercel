@@ -1,9 +1,12 @@
 const express = require("express");
+import { Request, Response } from "express";
 const app = express();
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../swagger.json");
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", (req: Request, res: Response) => res.send("Express on Vercel"));
 
-app.get('/add/:num1/:num2', (req, res) => {
+app.get('/add/:num1/:num2', (req: Request, res: Response) => {
     const num1 = parseFloat(req.params.num1);
     const num2 = parseFloat(req.params.num2);
 
@@ -14,6 +17,9 @@ app.get('/add/:num1/:num2', (req, res) => {
     const sum = num1 + num2;
     res.json({ result: sum });
 });
+
+// Swagger UI route
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 

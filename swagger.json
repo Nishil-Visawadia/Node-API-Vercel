@@ -1,0 +1,70 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0.0",
+        "description": "Documentation for Express APIs"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "summary": "Get home page",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "text/plain": {
+                                "example": "Express on Vercel"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/add/{num1}/{num2}": {
+            "get": {
+                "summary": "Add two numbers",
+                "parameters": [
+                    {
+                        "name": "num1",
+                        "in": "path",
+                        "description": "First number",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "num2",
+                        "in": "path",
+                        "description": "Second number",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "result": 5
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    }
+}
