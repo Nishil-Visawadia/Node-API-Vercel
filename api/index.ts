@@ -1,12 +1,12 @@
 const express = require("express");
-import { Request, Response } from "express";
+import * as expressModule from "express";
 const app = express();
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("../swagger.json");
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerDocument = require("../swagger.json");
 
-app.get("/", (req: Request, res: Response) => res.send("Express on Vercel"));
+app.get("/", (req: expressModule.Request, res: expressModule.Response) => res.send("Express on Vercel"));
 
-app.get('/add/:num1/:num2', (req: Request, res: Response) => {
+app.get('/add/:num1/:num2', (req: expressModule.Request, res: expressModule.Response) => {
     const num1 = parseFloat(req.params.num1);
     const num2 = parseFloat(req.params.num2);
 
@@ -18,8 +18,8 @@ app.get('/add/:num1/:num2', (req: Request, res: Response) => {
     res.json({ result: sum });
 });
 
-// Swagger UI route
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// // Swagger UI route
+// app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
