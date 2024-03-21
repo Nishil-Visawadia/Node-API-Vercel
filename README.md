@@ -73,3 +73,11 @@ vercel dev
 ```bash
 vercel
 ```
+
+Note: error codes
+
+```bash
+npm install -g ts-node
+npm install --save-dev @types/express
+npm install cors
+```

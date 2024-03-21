@@ -1,8 +1,18 @@
 const express = require("express");
 import * as expressModule from "express";
+// import { Request, Response } from "express";
 const app = express();
-// const swaggerUi = require("swagger-ui-express");
-// const swaggerDocument = require("../swagger.json");
+const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("../swagger.json");
+
+// Middleware to set CORS headers
+app.use((req: expressModule.Request, res: expressModule.Response, next: expressModule.NextFunction) => {
+    res.setHeader("Access-Control-Allow-Origin", "*"); // Allow requests from any origin
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // Allow specified HTTP methods
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Allow specified headers
+    next();
+});
 
 app.get("/", (req: expressModule.Request, res: expressModule.Response) => res.send("Express on Vercel"));
 
@@ -18,8 +28,8 @@ app.get('/add/:num1/:num2', (req: expressModule.Request, res: expressModule.Resp
     res.json({ result: sum });
 });
 
-// // Swagger UI route
-// app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// Swagger UI route
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
